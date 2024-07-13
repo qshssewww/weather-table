@@ -11,8 +11,8 @@ export const citiesSlice = createSlice({
 		addCity: (state, {payload: city}: PayloadAction<ICity>) => {
 			state.push(city)
 		},
-		removeCity: (state, {payload: city}) => {
-			state.splice(state.indexOf(city), 1)
+		removeCity: (state, {payload: cityIndex}: PayloadAction<number>) => {
+			state.splice(cityIndex, 1)
 		}
 	},
 })

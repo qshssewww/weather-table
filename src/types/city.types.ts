@@ -8,7 +8,7 @@ export interface ICity{
 	},
 	humidity: number
 	wind_mph: number
-} 
+}
 
 export interface ICityResponseLocation{
 	name: string

@@ -1,5 +1,5 @@
 .weatherCard {
-	cursor: pointer;
+	position: relative;
 	width: 100%;
   max-width: 300px;
   background: #fff;

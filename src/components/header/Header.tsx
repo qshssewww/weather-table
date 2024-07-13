@@ -15,6 +15,7 @@ const Header: React.FC = () => {
 	const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
 			getCity(cityValue)
+			setCityValue('');
     }
   };
 
