@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import styles from './weatherCard.module.css'
 import {ICity} from '../../types/city.types'
 import useActions from '../../hooks/useActions.ts'

@@ -24,14 +24,14 @@ const App: React.FC =  () => {
   return (
     <div className="app">
       <Header />
-      <div className="main">
+      <div className={cities.length > 0 ? "main" : 'no-cities'}>
         {
           cities.length > 0 ?
           cities?.map((city: ICity, index) => (
             <WeatherCard cityIndex={index} city={city} key={index}/>
           ))
           :
-          <div className="no-cities">add the city</div>
+          <div>add the city</div>
         }
       </div>
     </div>

@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import {ICityResponseLocation, ICityResponseCurrent, ICity, IInputData} from '../../types/city.types'
+import {IData, ICity, IInputData} from '../../types/city.types'
 import {actions} from '../cities/cities.slice.ts'
 
 
@@ -8,12 +8,6 @@ import {actions} from '../cities/cities.slice.ts'
 const baseUrl = `http://api.weatherapi.com/v1/current.json?key=${import.meta.env.VITE_WEATHER_API_KEY}&q=`
 
 const searchUrl = `http://api.weatherapi.com/v1/search.json?key=${import.meta.env.VITE_WEATHER_API_KEY}&q=`
-
-interface IData {
-	location: ICityResponseLocation,
-	current: ICityResponseCurrent,
-}
-
 
 
 
@@ -53,16 +47,19 @@ export const api = createApi({
 				}
 			}
 	}),
-	getCityInput: build.query<Array<IInputData>, string>({
-		queryFn: async (arg: string, d, _, baseQuery) => {
+	getCityInput: build.query<IInputData[], string>({
+		queryFn: async (arg, _api, _extraOptions, baseQuery) => {
 			try{
 				const response = await baseQuery({
 					url: searchUrl+arg,
 					method: 'GET',
 				});
-				return response
+				
+				return { data: response.data as IInputData[] };
 			} catch {
-				return { error: { status: 'CUSTOM_ERROR', data: 'Something went wrong' } }
+
+				return { error: { status: 'CUSTOM_ERROR', data: 'Something went wrong'}}
+
 			}
 		}
 		}

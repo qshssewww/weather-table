@@ -8,6 +8,11 @@ export interface IInputData{
 	url: string
 }
 
+export interface IData {
+	location: ICityResponseLocation,
+	current: ICityResponseCurrent,
+}
+
 
 export interface ICity{
 	name: string 

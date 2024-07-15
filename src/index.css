@@ -36,7 +36,17 @@ ul {
   grid-gap: 10px;
 	justify-items: center;
 }
-
+.no-cities{
+	margin-top: 50px;
+	background: #fff;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  text-align: center;
+  display: grid;
+	justify-items: center;
+}
 .app{
 	padding: 0 10px;
 	max-width: 1000px;
