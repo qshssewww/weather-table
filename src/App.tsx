@@ -3,10 +3,8 @@ import WeatherCard from "./components/weatherCard/WeatherCard"
 import './index.css'
 import { useGetCityMutation } from "./store/api/api"
 import { ICity } from "./types/city.types"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import useCities from "./hooks/useCities"
-import Modal from "./components/modal/Modal"
-import useActions from "./hooks/useActions"
 
 const App: React.FC =  () => {
 
@@ -14,7 +12,6 @@ const App: React.FC =  () => {
 
   const cities = useCities()
 
-  const {removeCity} = useActions()
 
   const [getCity] = useGetCityMutation()
 

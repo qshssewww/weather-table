@@ -1,3 +1,14 @@
+export interface IInputData{
+	id: number,
+	name: string,
+	region: string,
+	country: string,
+	lat: number,
+	lon: number,
+	url: string
+}
+
+
 export interface ICity{
 	name: string 
 	country: string

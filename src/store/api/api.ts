@@ -1,18 +1,19 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import {ICityResponseLocation, ICityResponseCurrent, ICity} from '../../types/city.types'
+import {ICityResponseLocation, ICityResponseCurrent, ICity, IInputData} from '../../types/city.types'
 import {actions} from '../cities/cities.slice.ts'
 
-
-const city = 'москва'
 
 
 
 const baseUrl = `http://api.weatherapi.com/v1/current.json?key=${import.meta.env.VITE_WEATHER_API_KEY}&q=`
 
+const searchUrl = `http://api.weatherapi.com/v1/search.json?key=${import.meta.env.VITE_WEATHER_API_KEY}&q=`
+
 interface IData {
 	location: ICityResponseLocation,
 	current: ICityResponseCurrent,
 }
+
 
 
 
@@ -29,7 +30,7 @@ export const api = createApi({
 	}),
 	endpoints: build => ({
 		getCity: build.mutation<IData, string>({
-			queryFn: async (arg: string, { dispatch }: { dispatch: any }, _, baseQuery) => {
+			queryFn: async (arg: string, { dispatch }: {dispatch: any}, _, baseQuery) => {
 				try{
 					const response = await baseQuery({
             url: `${arg}&aqi=no`,
@@ -46,14 +47,27 @@ export const api = createApi({
 						},
 						wind_mph: response.data.current.wind_mph,
 					}
-					console.log(response.data, 12323232)
 					dispatch(actions.addCity(data));
 				} catch {
 					return { error: { status: 'CUSTOM_ERROR', data: 'Something went wrong' } }
 				}
 			}
-	}), 
+	}),
+	getCityInput: build.query<Array<IInputData>, string>({
+		queryFn: async (arg: string, d, _, baseQuery) => {
+			try{
+				const response = await baseQuery({
+					url: searchUrl+arg,
+					method: 'GET',
+				});
+				return response
+			} catch {
+				return { error: { status: 'CUSTOM_ERROR', data: 'Something went wrong' } }
+			}
+		}
+		}
+	)
 })
 })
 
-export const { useGetCityMutation } = api;
+export const { useGetCityMutation, useGetCityInputQuery } = api;

@@ -6,8 +6,15 @@
   top: 0;
   left: 0;
 }
+.searchContainer{
+  position: relative;
+  width: 400px;
+  margin: 20px auto;
+}
 
 .header h1 {
+
+  justify-content: center;
 	color: #333;
 	font-size: 32px;
 }
@@ -33,6 +40,41 @@ input::placeholder {
   color: #aaa;
   font-style: italic;
 }
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  max-width: 400px;
+  width: 100%;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-height: 200px;
+  overflow-y: auto;
+  animation: slideDown 0.3s ease;
+}
+
+.dropdownItem {
+  padding: 6px;
+  cursor: pointer;
+}
+
+.dropdownItem:hover {
+  background: #f0f0f0;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+} 
 
 @media (max-width: 639px) {
 	.header {
