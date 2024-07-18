@@ -3,22 +3,15 @@ import {ICity} from '../../types/city.types'
 import useActions from '../../hooks/useActions.ts'
 import { FaRegTrashCan } from "react-icons/fa6";
 
-interface ICityCard{
-	city: ICity,
-	cityIndex: number,
-}
 
-const WeatherCard = ({ city, cityIndex }: ICityCard) => {
+const WeatherCard = ({ city }: {city: ICity}) => {
 
 	const {removeCity} = useActions()
 
-	const removeCard = () => {
-		removeCity(cityIndex)
-	}
 
 	return (
 		<div className={styles.weatherCard}>
-			<FaRegTrashCan onClick={removeCard} style={{position: "absolute", right: '25', cursor: "pointer"}} />
+			<FaRegTrashCan onClick={() => removeCity(city)} style={{position: "absolute", right: '25', cursor: "pointer"}} />
 			<h2>{city?.name}</h2>
 			<h3>{city?.country}</h3>
 			<p className={styles.temperature}>{city?.temp_c}°C</p>

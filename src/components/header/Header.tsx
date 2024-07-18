@@ -18,16 +18,18 @@ const Header: React.FC = () => {
 	}
 
 	const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-		if(cityValue.length >= 3 && data[0]?.name){
-			setIsDropdownOpen(true);
-		} else {
-			setIsDropdownOpen(false);
+		if (data){
+			if(cityValue.length >= 3 && data[0].name){
+				setIsDropdownOpen(true);
+			} else {
+				setIsDropdownOpen(false);
+			}
+			if (event.key === 'Enter') {
+				getCity(cityValue)
+				setCityValue('');
+				setIsDropdownOpen(false);
+			}
 		}
-    if (event.key === 'Enter') {
-			getCity(cityValue)
-			setCityValue('');
-			setIsDropdownOpen(false);
-    }
   };
 
 	const clickDropItem = (e: MouseEvent<HTMLDivElement>, cityName: string) => {

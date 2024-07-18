@@ -24,43 +24,36 @@ export const api = createApi({
 	}),
 	endpoints: build => ({
 		getCity: build.mutation<IData, string>({
-			queryFn: async (arg: string, { dispatch }: {dispatch: any}, _, baseQuery) => {
-				try{
+			queryFn: async (arg, { dispatch }, _, baseQuery)=> {
 					const response = await baseQuery({
             url: `${arg}&aqi=no`,
             method: 'GET',
           });
+
+					const responseData = response.data as IData;
+					
 					const data: ICity = {
-						name: response.data.location.name,
-						country: response.data.location.country,
-						temp_c: response.data.current.temp_c,
-						humidity: response.data.current.humidity,
+						name: responseData.location.name,
+						country: responseData.location.country,
+						temp_c: responseData.current.temp_c,
+						humidity: responseData.current.humidity,
 						condition: {
-							text: response.data.current.condition.text,
-							icon: response.data.current.condition.icon,
+							text: responseData.current.condition.text,
+							icon: responseData.current.condition.icon,
 						},
-						wind_mph: response.data.current.wind_mph,
+						wind_mph: responseData.current.wind_mph,
 					}
 					dispatch(actions.addCity(data));
-				} catch {
-					return { error: { status: 'CUSTOM_ERROR', data: 'Something went wrong' } }
-				}
+					return {data: responseData}
 			}
 	}),
 	getCityInput: build.query<IInputData[], string>({
 		queryFn: async (arg, _api, _extraOptions, baseQuery) => {
-			try{
 				const response = await baseQuery({
 					url: searchUrl+arg,
 					method: 'GET',
 				});
-				
 				return { data: response.data as IInputData[] };
-			} catch {
-
-				return { error: { status: 'CUSTOM_ERROR', data: 'Something went wrong'}}
-
-			}
 		}
 		}
 	)

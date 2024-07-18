@@ -11,8 +11,9 @@ export const citiesSlice = createSlice({
 		addCity: (state, {payload: city}: PayloadAction<ICity>) => {
 			state.push(city)
 		},
-		removeCity: (state, {payload: cityIndex}: PayloadAction<number>) => {
-			state.splice(cityIndex, 1)
+		removeCity: (state, {payload: city}: PayloadAction<ICity>) => {
+			console.log('123123')
+			return state.filter(c => c.name !== city.name);
 		}
 	},
 })

@@ -28,7 +28,7 @@ const App: React.FC =  () => {
         {
           cities.length > 0 ?
           cities?.map((city: ICity, index) => (
-            <WeatherCard cityIndex={index} city={city} key={index}/>
+            <WeatherCard city={city} key={index}/>
           ))
           :
           <div>add the city</div>
